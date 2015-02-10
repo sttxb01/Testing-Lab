@@ -3,19 +3,18 @@
 
 ### Overview
 
-Testing is good
-
+The *obvious* value of testing is that it demonstrates that your code works (or shows that you have more work to do).  However, testing also helps plan our work and gives us a place to start.  In this lab you will learn about JUnit, the testing framwork in Java.  You will write tests for two simple classes and learn how Test-Drive Development can help you write correct code faster.
 
 ### Plan Before You Code
 
 Testing helps you think more deeply about what the specification of the class means.  If we do this before we start coding, we can avoid errors.  Consider the following description for a `Scoreboard` class that holds the top 10 scores and corresponding names:
 
 - `Scoreboard()` creates an emtpy scoreboard.
-- `isHighScore(score : int) : boolean}` returns true of the score is a highscore, and false otherwise.
-- `addScore(name : String, score : int) : void` adds the score and name to the appropriate position in the high score list.  If the score is not a high score, the list is not changed.
-- `getName(position : int) : String` returns the name in the specified position.
-- `getScore(position : int) : int` returns the score in the specified position.
-- `getNumScores() : int` returns the number of high scores, a value between 0 and 10 (inclusive).
+- `boolean isHighScore(int score)` returns true of the score is a highscore, and false otherwise.
+- `void addScore(String name, int score)` adds the score and name to the appropriate position in the high score list.  If the score is not a high score, the list is not changed.
+- `String getName(int position)` returns the name in the specified position.
+- `int getScore(int position)` returns the score in the specified position.
+- `int getNumScores()` returns the number of high scores, a value between 0 and 10 (inclusive).
 
 From this description, you should see that we will need to have a linear collection of names and scores (an array, maybe?).  As a result, we should think about typical mistakes we might make when manipulating an array.
 
@@ -23,7 +22,7 @@ From this description, you should see that we will need to have a linear collect
 
 ### Temporal Thinking
 
-The methods of a class must be prepared to repond whenever they are called.  The value returned by `getScore()` depends on when it is called.  Similarly, `getAverage` depends on how many values are in the data set (sum / quantity doesn't work when there are zero values!).
+The methods of a class must be prepared to repond whenever they are called.  The value returned by `getScore()` depends on when it is called.  Similarly, `getAverage()` depends on how many values are in the data set (sum / quantity doesn't work when there are zero values!).
 
 Therefore, we should always think about how the methods should work with:
 
@@ -55,9 +54,9 @@ For example, with the Scoreboard, we write a test to verify that tie scores are 
 In Monte Carlo simulations, we always need to take the average of a set of values.  Here is the interface for an `Average` class:
 
 - `Average()` creates a new object representing an average with no data.
-- `addValue(double): void` includes the specified value in the dataset.
-- `getAverage(): double` returns the current average (0 of no data).
-- `getCount(): int` returns the number of values in the data set.
+- `void addValue(double value)` includes the specified value in the dataset.
+- `double getAverage()` returns the current average (0 of no data).
+- `int getCount()` returns the number of values in the data set.
 
 **Activity**: make a *skeleton* for the `Average` class.  The skeleton should contain no data members, have an empty constructor, and have methods with a minimal body.  For a void method, this means the body is empty.  For a value-returning method, made the method return 0.  Don't forget that we always want to save our code in the `src` folder.
 
@@ -113,7 +112,7 @@ Our code for the `Average` class *probably* works at this point, but we should w
 
 
 - A data set with 5 or more different values where the average is something other than 0.
-- A data set with 5 or more values where the average is 0.
+- A data set with 5 or more different values where the average is 0.
 - A data set with 5 or more values that are the same.
 
 When all these tests pass, we can be confident that the `Average` class works properly.
@@ -133,11 +132,11 @@ In addition to the ideas presented above, here are some questions to consider wh
 In mathematics we denote a range using open-closed bracket notation: [0,10) means all real numbers greater than or equal to zero but less than ten. So 0 and 7.3 lie in this range, while -2.3, 10, and 11.5 do not.  Here is an interface for a `Range` class:
 
 - `Range(double start, double stop)` creates a range with the specified values.  It is legal for start < stop or stop < start, and both represent the same range, [min(start, stop), max(start, stop)).  If start == stop, then we have the empty range, which we will treat at the range [0, 0). 
-- 'contains(double value): boolean` returns true if the value is in the range and false otherwise.
-- `getWidth(): double' returns the width of the range, which is defined as |start - stop|.
-- `getMin(): double' returns the smaller value of the two values defining the range.
-- `getMax(): double' returns the larger value of the two values defining the range.
-- 'Range intersection(Range other): Range' returns the intersection of the two ranges -- that is, a new range where the caller and the parameter overlap.  This resulting range may be empty.
+- `boolean contains(double value)` returns true if the value is in the range and false otherwise.
+- `double getWidth()` returns the width of the range, which is defined as |start - stop|.
+- `double getMin()` returns the smaller value of the two values defining the range.
+- `double getMax()` returns the larger value of the two values defining the range.
+- `Range intersection(Range other)` returns the intersection of the two ranges -- that is, a new range where the caller and the parameter overlap.  This resulting range may be empty.
 
 >**Question 3:** Answer the "Testing Questions" descripted in the previous section.
 
