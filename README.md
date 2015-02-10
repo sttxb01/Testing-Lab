@@ -3,14 +3,14 @@
 
 ### Overview
 
-The *obvious* value of testing is that it demonstrates that your code works (or shows that you have more work to do).  However, testing also helps plan our work and gives us a place to start.  In this lab you will learn about JUnit, the testing framwork in Java.  You will write tests for two simple classes and learn how Test-Drive Development can help you write correct code faster.
+The *obvious* value of testing is that it demonstrates that your code works (or shows that you have more work to do).  However, testing also helps plan our work and gives us a place to start.  In this lab you will learn about JUnit, the testing framwork in Java.  You will write tests for two simple classes and learn how Test-Driven Development can help you write correct code faster.
 
 ### Plan Before You Code
 
 Testing helps you think more deeply about what the specification of the class means.  If we do this before we start coding, we can avoid errors.  Consider the following description for a `Scoreboard` class that holds the top 10 scores and corresponding names:
 
 - `Scoreboard()` creates an emtpy scoreboard.
-- `boolean isHighScore(int score)` returns true of the score is a highscore, and false otherwise.
+- `boolean isHighScore(int score)` returns true if the score is a highscore, and false otherwise.
 - `void addScore(String name, int score)` adds the score and name to the appropriate position in the high score list.  If the score is not a high score, the list is not changed.
 - `String getName(int position)` returns the name in the specified position.
 - `int getScore(int position)` returns the score in the specified position.
@@ -22,7 +22,7 @@ From this description, you should see that we will need to have a linear collect
 
 ### Temporal Thinking
 
-The methods of a class must be prepared to repond whenever they are called.  The value returned by `getScore()` depends on when it is called.  Similarly, `getAverage()` depends on how many values are in the data set (sum / quantity doesn't work when there are zero values!).
+The methods of a class must be prepared to respond whenever they are called.  The value returned by `getScore()` depends on when it is called.  Similarly, `getAverage()` depends on how many values are in the data set (sum / quantity doesn't work when there are zero values!).
 
 Therefore, we should always think about how the methods should work with:
 
@@ -30,14 +30,14 @@ Therefore, we should always think about how the methods should work with:
 - An instance with a single mutation.
 - An instance with multiple mutations.
 
-Each of these possibilities translates to one test case, and epending on the class interface, there may be multiple ways to instantiate and mutate the object.
+Each of these possibilities translates to one test case, and depending on the class interface, there may be multiple ways to instantiate and mutate the object.
 
 >**Question 2:** List at least one configuration of a `Scoreboard` for each of the above scenarios.
 
 
 ### The Mantra of Testing
 
-All (good) unit test have the same form:
+All (good) unit tests have the same form:
 
 1. Create an object in a known state.
 2. Exercise the object (do something with the object).
@@ -78,11 +78,11 @@ In TDD, we write tests as we are developing our code (purists say we should writ
 ```
 
 - `assertEquals` is a method used to verify the stat of the object.  The first parameter is always the expected value.  The second value is the value from the object.  When the values being compared are float-point values, the third value is a tolerance -- how far the values can be apart before we call them different (this deals with float-point round-off errors).
-- Compile your code, and then press command-T to run the test.  Notice the green bar at the bottom right and the test name shown in green to the left.  This means your test passed.  If they are read, your test did not pass, and you should correct your code before you continue.
+- Compile your code, and then press command-T to run the test.  Notice the green bar at the bottom right and the test name shown in green to the left.  This means your test passed.  If they are red, your test did not pass, and you should correct your code before you continue.
 
 ### TDD -- Step 2
 
-It may seem like we have not accomplished anything significant -- after all, our code was written in a ways that makes this test pass even without the class representing an actual average.  But we are going to keep the `testNewAverage` test in our code *forever*.  When we make changes to our code, this test will fail if we break the class when there is no data.  In other words, our tests are watching to make sure we don't make any mistakes!
+It may seem like we have not accomplished anything significant -- after all, our code was written in a way that makes this test pass even without the class representing an actual average.  But we are going to keep the `testNewAverage` test in our code *forever*.  When we make changes to our code, this test will fail if we break the class when there is no data.  In other words, our tests are watching to make sure we don't make any mistakes!
 
 We have also solved the "blank page" problem.  Writing the skeleton of the class and a simple test has given us code to work with.  We no longer have to fret about where to start.
 
@@ -108,7 +108,7 @@ If you run your tests now (command-T), you will notice that the first test still
 
 Our code for the `Average` class *probably* works at this point, but we should write a few more tests to make sure.  
 
-**Activity:** Add the following tests to collection of test:
+**Activity:** Add the following tests to the collection of tests:
 
 
 - A data set with 5 or more different values where the average is something other than 0.
